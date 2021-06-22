@@ -34,7 +34,7 @@ def index():
     # converts to json 
     return jsonify(sortedEmployeeList)
 
-# *** POST endpoint *** 
+@app.route('/create', methods=['POST']) 
 def create():
     # takes as input a JSON object containing the following fields:
     # - employee_name
