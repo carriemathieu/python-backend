@@ -24,19 +24,25 @@
 
 <script>
     const newEmployeeForm = document.getElementById("newEmployeeForm")
-
-    
-    fetch('/api/create', {
-        method: 'POST', 
-        body: JSON.stringify({
-            content: addTodo
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }).then(response => response.json())
-    .then(msg => {
-        console.log(msg)
-        setAddTodo('')
+    newEmployeeForm.addEventListener('submit', e => {
+        e.preventDefault()
+        const employeeName = document.querySelector("#employee_name").value
+        const employeeSalary = document.querySelector("#employee_salary").value
+        const employeeAge = document.querySelector("#employee_age").value
+        postFetch(employeeName,employeeSalary,employeeAge)
     })
+
+    const postFetch = (employeeName,employeeSalary,employeeAge) => {
+        fetch('/api/create', {
+            method: 'POST', 
+            body: JSON.stringify({
+                employee_name: employeeName,
+                employee_salary: employeeSalary,
+                employee_age: employeeAge
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+    }
 </script>
