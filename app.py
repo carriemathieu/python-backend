@@ -1,3 +1,7 @@
+from flask import Flask, jsonify, request, json
+
+app = Flask(__name__) 
+
 employeeArray = [
     {
         "id":1, 
@@ -17,12 +21,26 @@ employeeArray = [
 }]
 
 # *** GET endpoint ***
-# - takes as input an employee’s ID 
-# - returns the matching employee’s name, salary, and age in JSON.
+def show(id):
+    # - takes as input an employee’s ID 
+    # print('Name: ', person.get('id', id))
+    return # the matching employee’s name, salary, and age in JSON.
 
 # *** GET endpoint ***
-# - returns an array of all employees
-# - sorted by highest salary to lowest
+@app.route('/', methods=['GET'])
+def index():
+    # sorted- higher order function that takes function as argument (lambda)
+    sortedEmployeeArray = sorted(employeeArray, key=lambda k: k['employee_salary']) 
+    return jsonify(sortedEmployeeArray)
 
-# *** POST endpoint ***
-# - takes as input a JSON object containing the following fields:
+# *** POST endpoint *** 
+def create():
+    # takes as input a JSON object containing the following fields:
+    # - employee_name
+    # - employee_salary
+    # - employee_age
+    # employeeArray.append{id: a, "employee_name": blah, "employee_salary": blah, "employee_age": blah}
+    return {'201' : 'employee created successfully'}
+
+if __name__ == '__main__':
+    app.run(debug=True)
