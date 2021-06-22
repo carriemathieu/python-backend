@@ -20,21 +20,21 @@ employeeList = [
         "employee_age":66
 }]
 
-@app.route('/<int:id>', methods=['GET'])
+@app.route('/api/<int:id>', methods=['GET'])
 def show(id):
     # loops over each dictionary in employeeList- if ID matches from url params, return JSON version of employee
     for employee in employeeList:
         if employee["id"] == id:
             return jsonify(employee)
 
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def index():
     # sorted- higher order function that takes function as argument (lambda)
     sortedEmployeeList = sorted(employeeList, key=lambda k: k['employee_salary'], reverse=True)
     # converts to json 
     return jsonify(sortedEmployeeList)
 
-@app.route('/create', methods=['POST']) 
+@app.route('/api/create', methods=['POST']) 
 def create():
     # takes as input a JSON object containing the following fields:
     # - employee_name
