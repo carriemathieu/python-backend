@@ -20,17 +20,17 @@ employeeArray = [
         "employee_age":66
 }]
 
-# *** GET endpoint ***
+@app.route('/<int:id>', methods=['GET'])
 def show(id):
     # - takes as input an employee’s ID 
     # print('Name: ', person.get('id', id))
     return # the matching employee’s name, salary, and age in JSON.
 
-# *** GET endpoint ***
 @app.route('/', methods=['GET'])
 def index():
     # sorted- higher order function that takes function as argument (lambda)
-    sortedEmployeeArray = sorted(employeeArray, key=lambda k: k['employee_salary']) 
+    sortedEmployeeArray = sorted(employeeArray, key=lambda k: k['employee_salary'], reverse=True)
+    # converts to json 
     return jsonify(sortedEmployeeArray)
 
 # *** POST endpoint *** 
