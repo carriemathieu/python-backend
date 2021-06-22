@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, json
 
 app = Flask(__name__) 
 
-employeeArray = [
+employeeList = [
     {
         "id":1, 
         "employee_name":"Tiger Nixon", 
@@ -22,16 +22,17 @@ employeeArray = [
 
 @app.route('/<int:id>', methods=['GET'])
 def show(id):
-    # - takes as input an employee’s ID 
-    # print('Name: ', person.get('id', id))
-    return # the matching employee’s name, salary, and age in JSON.
+    # loops over each dictionary in employeeList- if ID matches from url params, return JSON version of employee
+    for employee in employeeList:
+        if employee["id"] == id:
+            return jsonify(employee)
 
 @app.route('/', methods=['GET'])
 def index():
     # sorted- higher order function that takes function as argument (lambda)
-    sortedEmployeeArray = sorted(employeeArray, key=lambda k: k['employee_salary'], reverse=True)
+    sortedEmployeeList = sorted(employeeList, key=lambda k: k['employee_salary'], reverse=True)
     # converts to json 
-    return jsonify(sortedEmployeeArray)
+    return jsonify(sortedEmployeeList)
 
 # *** POST endpoint *** 
 def create():
