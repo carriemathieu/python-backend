@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, request, json
+from flask_cors import CORS
+import random
 
 app = Flask(__name__) 
+# enables CORS - can receive fetch from index.html
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 employeeList = [
     {
@@ -36,11 +40,16 @@ def index():
 
 @app.route('/api/create', methods=['POST']) 
 def create():
-    # takes as input a JSON object containing the following fields:
-    # - employee_name
-    # - employee_salary
-    # - employee_age
-    # employeeArray.append{id: a, "employee_name": blah, "employee_salary": blah, "employee_age": blah}
+    # converts json data from frontend to dictionary
+    request_data = json.loads(request.data)
+
+    name = request_data['employee_name']
+    salary = request_data['employee_salary']
+    age = request_data['employee_age']
+    
+    # appends data to existing employee list
+    employeeList.append({"id": random.randint(0,100), "employee_name": name, "employee_salary": salary, "employee_age": age})
+
     return {'201' : 'employee created successfully'}
 
 if __name__ == '__main__':
