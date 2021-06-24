@@ -23,14 +23,14 @@
 </html>
 
 <script>
-    const newEmployeeForm = document.getElementById("newEmployeeForm")
+    const newEmployeeForm = document.getElementById("newEmployeeForm");
     newEmployeeForm.addEventListener('submit', e => {
-        e.preventDefault()
-        const employeeName = document.querySelector("#employee_name").value
-        const employeeSalary = document.querySelector("#employee_salary").value
-        const employeeAge = document.querySelector("#employee_age").value
-        postFetch(employeeName,employeeSalary,employeeAge)
-    })
+        e.preventDefault();
+        const employeeName = document.querySelector("#employee_name").value;
+        const employeeSalary = document.querySelector("#employee_salary").value;
+        const employeeAge = document.querySelector("#employee_age").value;
+        postFetch(employeeName,employeeSalary,employeeAge);
+    });
 
     const postFetch = (employeeName,employeeSalary,employeeAge) => {
         fetch(`http://127.0.0.1:5000/api/create`, {
@@ -44,6 +44,6 @@
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        .catch(err => console.log(err))
-    }
+        .catch(err => console.log(err));
+    };
 </script>
